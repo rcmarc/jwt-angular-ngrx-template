@@ -19,14 +19,6 @@ export class AuthService {
     );
   }
 
-  logout(refreshToken: string) {
-    return this.http.post("/api/auth/logout", { refreshToken }).pipe(
-      tap(() => {
-        removeTokens();
-      })
-    );
-  }
-
   getUser() {
     return this.http.get<User>("/api/user");
   }
@@ -52,9 +44,4 @@ export class AuthService {
 function saveTokens(jwt: AuthInfo) {
   localStorage.setItem("accessToken", jwt.accessToken);
   localStorage.setItem("refreshToken", jwt.refreshToken);
-}
-
-function removeTokens() {
-  localStorage.removeItem("accessToken");
-  localStorage.removeItem("refreshToken");
 }
