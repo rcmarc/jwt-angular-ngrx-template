@@ -5,7 +5,7 @@ import {
   HttpContextToken,
 } from "@angular/common/http";
 import { ActivatedRoute } from "@angular/router";
-import { map, tap, withLatestFrom } from "rxjs";
+import { tap } from "rxjs";
 
 import { LoginCredentials, AuthInfo, User } from "@example/shared";
 
@@ -16,8 +16,6 @@ export class AuthService {
   login(credentials: LoginCredentials) {
     return this.http.post<AuthInfo>("/api/auth/login", credentials).pipe(
       tap((jwt) => saveTokens(jwt)),
-      withLatestFrom(this.route.queryParamMap),
-      map(([info]) => info)
     );
   }
 
