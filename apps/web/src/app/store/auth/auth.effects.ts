@@ -1,6 +1,6 @@
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Injectable } from "@angular/core";
-import { map, mergeMap, switchMap } from "rxjs";
+import { map, switchMap } from "rxjs";
 
 
 import { AuthActions } from "./auth.actions";
@@ -27,7 +27,7 @@ export class RefreshTokenRequestEffect {
   refreshTokenRequestEffect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.refreshTokenRequest),
-      mergeMap(() =>
+      switchMap(() =>
         this.auth
           .refreshToken()
           .pipe(map((res) => AuthActions.refreshTokenSuccess({ payload: res })))
@@ -42,7 +42,7 @@ export class GetUserRequestEffect {
   getUserRequestEffect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.getUserRequest),
-      mergeMap(() =>
+      switchMap(() =>
         this.auth
           .getUser()
           .pipe(map((res) => AuthActions.getUserSuccess({ payload: res })))
