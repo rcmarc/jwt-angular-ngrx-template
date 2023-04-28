@@ -1,7 +1,6 @@
 import { bootstrapApplication } from "@angular/platform-browser";
 import {
   provideRouter,
-  withEnabledBlockingInitialNavigation,
 } from "@angular/router";
 import { provideStore } from "@ngrx/store";
 import { provideStoreDevtools } from "@ngrx/store-devtools";
@@ -13,7 +12,7 @@ import { provideHttpRefreshContextToken } from "./app/http.context";
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
+    provideRouter(appRoutes),
     provideStore(reducers),
     provideHttpRefreshContextToken(),
     provideStoreDevtools(),
